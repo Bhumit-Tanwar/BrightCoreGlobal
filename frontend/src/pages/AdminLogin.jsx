@@ -23,7 +23,7 @@ const AdminLogin = () => {
 
     try {
       const response = await fetch(
-        "https://brightglobal-repo-production.up.railway.app/api/auth/login",
+        "https://brightcoreglobal-production.up.railway.app/api/auth/login",
         {
           method: "POST",
           headers: {

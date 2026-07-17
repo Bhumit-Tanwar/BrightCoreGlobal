@@ -29,7 +29,7 @@ const CertificatesManager = () => {
   const fetchCertificates = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('https://brightglobal-repo-production.up.railway.app/api/certificates', {
+      const res = await fetch('https://brightcoreglobal-production.up.railway.app/api/certificates', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -47,7 +47,7 @@ const CertificatesManager = () => {
     setStatus({ type: '', message: '' });
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`https://brightglobal-repo-production.up.railway.app/api/students/${searchRoll}`, {
+      const res = await fetch(`https://brightcoreglobal-production.up.railway.app/api/students/${searchRoll}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -97,7 +97,7 @@ const CertificatesManager = () => {
 
     try {
       const fileUrl = await uploadToCloudinary(selectedFile);
-      
+
       // Safety check: Agar image upload nahi hui toh process rok do
       if (!fileUrl) {
         setStatus({ type: 'error', message: 'Image upload failed. Certificate not saved.' });
@@ -119,7 +119,7 @@ const CertificatesManager = () => {
       };
 
       const token = localStorage.getItem('adminToken');
-      const dbRes = await fetch('https://brightglobal-repo-production.up.railway.app/api/certificates/add', {
+      const dbRes = await fetch('https://brightcoreglobal-production.up.railway.app/api/certificates/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(certificateRecord)
@@ -152,7 +152,7 @@ const CertificatesManager = () => {
     if (!window.confirm("Are you sure you want to delete this certificate? This cannot be undone.")) return;
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`https://brightglobal-repo-production.up.railway.app/api/certificates/${id}`, {
+      const res = await fetch(`https://brightcoreglobal-production.up.railway.app/api/certificates/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -178,7 +178,7 @@ const CertificatesManager = () => {
       if (editFile) {
         const newUrl = await uploadToCloudinary(editFile);
         if (newUrl) {
-            updatedUrl = newUrl;
+          updatedUrl = newUrl;
         }
       }
 
@@ -189,7 +189,7 @@ const CertificatesManager = () => {
       };
 
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`https://brightglobal-repo-production.up.railway.app/api/certificates/${editData._id}`, {
+      const res = await fetch(`https://brightcoreglobal-production.up.railway.app/api/certificates/${editData._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(updatePayload)

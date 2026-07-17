@@ -5,8 +5,8 @@ import { Search, CheckCircle, XCircle, Award, Calendar, User, Mail, AlertCircle,
 const CertificateTracking = () => {
   const [searchId, setSearchId] = useState('');
   const [isSearching, setIsSearching] = useState(false);
-  const [certificateData, setCertificateData] = useState(null); 
-  const [error, setError] = useState(null); 
+  const [certificateData, setCertificateData] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -17,11 +17,11 @@ const CertificateTracking = () => {
     setError(null);
 
     try {
-      const response = await fetch(`https://brightglobal-repo-production.up.railway.app/api/certificates/verify/${searchId.trim()}`);
-      
+      const response = await fetch(`https://brightcoreglobal-production.up.railway.app/api/certificates/verify/${searchId.trim()}`);
+
       if (response.ok) {
         const data = await response.json();
-        setCertificateData(data); 
+        setCertificateData(data);
       } else if (response.status === 404) {
         setError('not-found');
       } else {
@@ -51,13 +51,13 @@ const CertificateTracking = () => {
     <div className="min-h-screen bg-[#F8FAFC] pt-32 pb-24 font-sans">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          
+
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-[#031B33] mb-4">Certificate Verification</h1>
             <p className="text-slate-600 text-lg">Verify the authenticity of Brightcore Global Academy certificates.</p>
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,31,91,0.08)] p-8 md:p-12 border-t-4 border-[#BE9A4A] relative z-10"
@@ -67,14 +67,14 @@ const CertificateTracking = () => {
                 <div className="absolute left-6 text-[#031B33]">
                   <Award size={24} />
                 </div>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={searchId}
                   onChange={(e) => setSearchId(e.target.value)}
                   placeholder="Enter Certificate ID (e.g., BC-2026-001)"
                   className="w-full bg-slate-50 border-2 border-slate-200 rounded-full py-5 pl-16 pr-40 text-lg focus:outline-none focus:border-[#BE9A4A] focus:bg-white transition-all shadow-inner text-[#031B33] uppercase"
                 />
-                <button 
+                <button
                   type="submit"
                   disabled={isSearching}
                   className="absolute right-2 top-2 bottom-2 px-8 bg-[#031B33] text-white rounded-full font-semibold hover:bg-[#BE9A4A] transition-colors flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
@@ -92,10 +92,10 @@ const CertificateTracking = () => {
 
             <div className="mt-12 min-h-[300px]">
               <AnimatePresence mode="wait">
-                
+
                 {/* Default State */}
                 {!certificateData && !error && !isSearching && (
-                  <motion.div 
+                  <motion.div
                     key="initial"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -109,7 +109,7 @@ const CertificateTracking = () => {
 
                 {/* Success State */}
                 {certificateData && (
-                  <motion.div 
+                  <motion.div
                     key="found"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -119,7 +119,7 @@ const CertificateTracking = () => {
                     <div className="absolute top-0 right-0 p-8 opacity-10 text-green-600">
                       <Award size={120} />
                     </div>
-                    
+
                     <div className="flex items-start gap-4 mb-8 relative z-10">
                       <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0 shadow-sm">
                         <CheckCircle size={28} />
@@ -137,7 +137,7 @@ const CertificateTracking = () => {
                           <User size={18} className="text-[#BE9A4A]" /> {certificateData.studentName}
                         </div>
                       </div>
-                      
+
                       <div>
                         <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Student Email</p>
                         <div className="flex items-center gap-2 text-lg font-bold text-[#031B33]">
@@ -165,22 +165,22 @@ const CertificateTracking = () => {
                           {certificateData.certificateId}
                         </div>
                       </div>
-                      
+
                       {/* View & Download Buttons Logic */}
                       <div className="md:col-span-2 mt-4 pt-6 border-t border-slate-100 flex flex-col sm:flex-row gap-4 justify-center items-center">
                         {certificateData.certificateUrl ? (
                           <>
-                            <a 
-                              href={certificateData.certificateUrl} 
-                              target="_blank" 
+                            <a
+                              href={certificateData.certificateUrl}
+                              target="_blank"
                               rel="noopener noreferrer"
                               className="bg-white border-2 border-[#031B33] text-[#031B33] px-6 py-2.5 rounded-lg font-bold hover:bg-slate-50 transition-colors flex items-center justify-center gap-2 w-full sm:w-auto"
                             >
                               <Eye size={18} /> View Original
                             </a>
-                            
-                            <a 
-                              href={getDownloadUrl(certificateData.certificateUrl)} 
+
+                            <a
+                              href={getDownloadUrl(certificateData.certificateUrl)}
                               download={`Certificate_${certificateData.certificateId}`}
                               className="bg-[#031B33] text-white px-6 py-2.5 rounded-lg font-bold hover:bg-[#BE9A4A] transition-colors shadow-md flex items-center justify-center gap-2 w-full sm:w-auto"
                             >
@@ -199,7 +199,7 @@ const CertificateTracking = () => {
 
                 {/* Errors */}
                 {error === 'not-found' && (
-                  <motion.div 
+                  <motion.div
                     key="not-found"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -215,7 +215,7 @@ const CertificateTracking = () => {
                 )}
 
                 {error === 'network-error' && (
-                  <motion.div 
+                  <motion.div
                     key="network-error"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
