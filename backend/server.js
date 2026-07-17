@@ -3,8 +3,15 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
+const dns = require("dns");
+
+// Override DNS servers to handle MongoDB Atlas SRV record resolution issues in container environments
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 dotenv.config({ path: path.join(__dirname, ".env") });
+
+// Disable Mongoose command buffering so queries fail immediately if not connected, preventing hangs
+mongoose.set("bufferCommands", false);
 
 const app = express();
 
