@@ -1,0 +1,9 @@
+{
+  "name": "bright-core-global",
+  "version": "1.0.0",
+  "description": "Bright Core Global Academy Root Orchester",
+  "scripts": {
+    "postinstall": "npm install --prefix backend",
+    "start": "node backend/server.js"
+  }
+}
