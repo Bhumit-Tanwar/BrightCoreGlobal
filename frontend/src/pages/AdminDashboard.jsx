@@ -37,7 +37,7 @@ const AdminDashboard = () => {
 
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch('https://brightglobal-repo-production.up.railway.app/api/certificates/add', {
+      const response = await fetch('https://brightcoreglobal-production.up.railway.app/api/certificates/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
